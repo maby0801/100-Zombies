@@ -1,0 +1,175 @@
+/* Header */
+body {
+    background: rgb(240, 240, 243);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 640px;
+    margin: auto;
+}
+
+h1 {
+    color: #58626b;
+}
+
+header {
+    text-align: center;
+    background-color: #bfc6cc;
+    border-color: #808080;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 70px;
+}
+
+input {
+    margin-bottom: 20px;
+    height: 30px;
+    font-size: 100%;
+    padding-left: 5px;
+    margin-right: 10px;
+    width: 50px;
+}
+
+input:disabled {
+    background: #bfc6cc;
+    border: 0;
+}
+
+button {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+    height: 40px;
+    border-radius: 2px;
+    border: 0;
+    width: 200px;
+    background-color: #972edd;
+    font-weight: 100;
+    font-size: 105%;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:disabled {
+    color: #58626b;
+    background-color: #bfc6cc;
+}
+
+button:disabled:hover{
+    opacity: 1;
+    cursor: initial;
+}
+
+a {
+    color: #8219c8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Simulation */
+main {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+                    'houseContainer stats'
+                    'finalResults finalResults'
+}
+
+#houseContainer {
+    width: 301px;
+    grid-area: houseContainer;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+#simulationWrapper {
+    border-color: #808080;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    padding: 10px;
+}
+
+.house {
+    height: 24px;
+    width: 24px;
+    border-radius: 2px;
+    margin: 3px;
+    display: inline-block;
+}
+
+.human {
+    background-image: url("img/house_human.png");
+}
+
+.zombie {
+    background-image: url("img/house_zombie.png");
+}
+
+/* Stats */
+#simulationSummary {
+    grid-area: stats;
+
+    border-color: #808080;
+    border-width: 0 1px 1px 0px;
+    border-style: solid;
+    padding: 10px;
+}
+
+#simulationSummary p {
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.rounds {
+    float: right;
+}
+
+.iconZombie {
+    min-width: 80px;
+    padding-top: 3px;
+    height: 27px;
+    display: inline-block;
+    text-align: right;
+
+    background-image: url("img/icon_zombie.png");
+    background-repeat: no-repeat;
+}
+
+.iconHuman {
+    min-width: 80px;
+    padding-top: 3px;
+    height: 27px;
+    margin-left: 20px;
+    display: inline-block;
+    text-align: right;
+
+    background-image: url("img/icon_human.png");
+    background-repeat: no-repeat;
+}
+
+/* Final results */
+#finalResults {
+    grid-area: finalResults;
+
+    margin: 0;
+    background: #58626b;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 120%;
+    color: white;
+}
+
+.avgRounds {
+    color: #a5ff69;
+}
