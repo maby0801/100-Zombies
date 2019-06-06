@@ -56,51 +56,46 @@ function prepareSimulation() {
 }
 
 function runSimulation(speed, houses, simulationLimit) {
-    simulationCounter++;
+    if (simulationCounter < simulationLimit) {
+        // First zombie lives at address -1
+        var zombies = [-1];
+        var round = 0;
+        var humans = houses;
 
-    if (simulationCounter > simulationLimit) {
-        endSimulation(result);
-        return;
-    }
-
-    // First zombie lives at address -1
-    var zombies = [-1];
-    var round = 0;
-    var humans = houses;
-
-    render(zombies, humans, houses);
-
-    setTimeout(function () { nextRound(); }, speed);
-
-    function nextRound() {
-        round++;
-
-        // Commit one attack per zombie
-        var horde = zombies.length;
-        for (var i = 0; i < horde; i++) {
-            var target = Math.floor(Math.random() * houses);
-
-            // Determine if attack was a hit
-            if (!zombies.includes(target)) {
-                zombies.push(target);
-                humans--;
-            }
-        }
-
-        // Update graphics
         render(zombies, humans, houses);
-        console.log("Round: " + round + " / Zombies: " + zombies.length + " / Humans: " + humans);
 
-        if (humans > 0) {
-            setTimeout(function () { nextRound(); }, speed);
-        } else {
-            // Start next simulation
-            console.log("-------------------------")
-            simulationSummary.innerHTML += "<p>Simulation " + simulationCounter + ": <span class='rounds'>" + round + " rounds</span></p>";
-            result.push(round);
+        setTimeout(function () { nextRound(); }, speed);
 
-            setTimeout(function () { runSimulation(speed, houses, simulationLimit) }, 800);
-        }
+        function nextRound() {
+            // Commit one attack per zombie
+            var horde = zombies.length;
+            for (var i = 0; i < horde; i++) {
+                var target = Math.floor(Math.random() * houses);
+
+                // Determine if attack was a hit
+                if (!zombies.includes(target)) {
+                    zombies.push(target);
+                    humans--;
+                }
+            }
+
+            // Update graphics
+            render(zombies, humans, houses);
+            round++;
+
+            if (humans > 0) {
+                // Repeat
+                setTimeout(function () { nextRound(); }, speed);
+            } else {
+                // Start next simulation
+                simulationSummary.innerHTML += "<p>Simulation " + simulationCounter + ": <span class='rounds'>" + round + " rounds</span></p>";
+                result.push(round);
+                setTimeout(function () { runSimulation(speed, houses, simulationLimit) }, 800);
+            }
+        } 
+        simulationCounter++;
+    } else {
+        endSimulation(result);
     }
 }
 
